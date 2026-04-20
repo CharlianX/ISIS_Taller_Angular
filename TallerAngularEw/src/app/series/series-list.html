@@ -1,0 +1,37 @@
+<div class="container-fluid px-4 mt-4">
+  <div class="row">
+    <div class="col-12 col-md-8">
+      <table class="table table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" class="fw-bold">#</th>
+            <th scope="col" class="fw-bold">Name</th>
+            <th scope="col" class="fw-bold">Channel</th>
+            <th scope="col" class="fw-bold">Seasons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let serie of series" (click)="onSelect(serie)" style="cursor: pointer;">
+            <th scope="row">{{ serie.id }}</th>
+            <td class="text-primary">{{ serie.name }}</td>
+            <td>{{ serie.channel }}</td>
+            <td>{{ serie.seasons }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-1">Seasons average: {{ promedioTemporadas }}</p>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="card" style="width: 18rem;" *ngIf="selectedSerie">
+        <img [src]="selectedSerie.poster" class="card-img-top" [alt]="selectedSerie.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ selectedSerie.name }}</h5>
+          <p class="card-text">{{ selectedSerie.description }}</p>
+          <a [href]="selectedSerie.webpage" target="_blank">{{ selectedSerie.webpage }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideHttpClient, withFetch } from '@angular/common/http'; // Usamos la forma recomendada moderna
+
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { SeriesModule } from './series/series-module'; 
 
-// app-module.ts
-import { HttpClientModule } from '@angular/common/http';
 @NgModule({
+  declarations: [
+    App
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SeriesModule,
-    HttpClientModule 
+    SeriesModule
+    // Eliminamos HttpClientModule de aquí
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withFetch()) 
+  ],
   bootstrap: [App]
 })
 export class AppModule { }
+
+

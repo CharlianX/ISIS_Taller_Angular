@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Serie } from './serie';
 import { SerieService } from './serie.service'; 
 
@@ -13,7 +13,7 @@ export class SeriesListComponent implements OnInit {
   promedioTemporadas: number = 0;
   selectedSerie: Serie | null = null; // <-- Guardará la serie que reciba clic
 
-  constructor(private serieService: SerieService) { }
+  constructor(private serieService: SerieService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getSeries();
@@ -24,6 +24,8 @@ export class SeriesListComponent implements OnInit {
       next: (datos: Serie[]) => {
         this.series = datos;
         this.calcularPromedio();
+
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error("Error cargando las series:", error);
